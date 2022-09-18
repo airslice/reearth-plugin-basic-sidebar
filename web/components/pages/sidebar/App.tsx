@@ -1,83 +1,149 @@
-import type { Theme } from "@web/theme/common";
-import ThemeProvider from "@web/theme/provider";
-import type { actHandles } from "@web/types";
-import { postMsg } from "@web/utils/common";
-import { Tabs } from "antd";
 import {
-  // useCallback,
-  useEffect,
-  useState,
-  useMemo,
-  // useRef,
-  // useReducer,
-} from "react";
+  ChakraProvider,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  Flex,
+  Center,
+  Text,
+  Box,
+  IconButton,
+} from "@chakra-ui/react";
+import CloseIcon from "@web/components/atoms/Icons/CloseIcon";
+import MenuIcon from "@web/components/atoms/Icons/MenuIcon";
+
+import useHooks from "./hooks";
+import theme from "./theme";
 
 const App = () => {
-  // const isActive = useRef(false);
-  const [theme, setTheme] = useState("light");
-  const [overriddenTheme, setOverriddenTheme] = useState<Theme>();
-
-  // const updateReducer = useCallback(
-  //   (num: number): number => (num + 1) % 1_000_000,
-  //   []
-  // );
-  // const [, forceUpdate] = useReducer(updateReducer, 0);
-
-  // const onClose = useCallback(() => {}, []);
-
-  // const handleActiveChange = useCallback(
-  //   (active: boolean) => {
-  //     isActive.current = active;
-  //     if (!isActive.current) {
-  //       onClose();
-  //     }
-  //   },
-  //   [onClose]
-  // );
-
-  // const onResize = useCallback((width: number, height: number) => {
-  //   postMsg("resize", [width, height]);
-  // }, []);
-
-  const actHandles: actHandles = useMemo(() => {
-    return {
-      setTheme: ({
-        theme,
-        overriddenTheme,
-      }: {
-        theme: string;
-        overriddenTheme: Theme;
-      }) => {
-        setTheme(theme);
-        setOverriddenTheme(overriddenTheme);
-      },
-    };
-  }, []);
-
-  useEffect(() => {
-    (globalThis as any).addEventListener("message", (msg: any) => {
-      if (msg.source !== (globalThis as any).parent || !msg.data.act) return;
-      actHandles[msg.data.act as keyof actHandles]?.(msg.data.payload);
-    });
-    postMsg("getTheme");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { isSidebarShown, hideSidebar, showSidebar } = useHooks();
 
   return (
-    <ThemeProvider theme={theme} overriddenTheme={overriddenTheme}>
-      <Tabs
-        defaultActiveKey="1"
-        centered
-        items={new Array(3).fill(null).map((_, i) => {
-          const id = String(i + 1);
-          return {
-            label: `Tab ${id}`,
-            key: id,
-            children: `Content of Tab Pane ${id}`,
-          };
-        })}
+    <ChakraProvider theme={theme}>
+      <IconButton
+        position="absolute"
+        top="0"
+        left="0"
+        aria-label=""
+        bg="white"
+        color="turquoise"
+        borderRadius="0"
+        size="md"
+        transform={
+          isSidebarShown ? "translate3d(-100%,0,0)" : "translate3d(0,0,0)"
+        }
+        _hover={{
+          color: "white",
+          background: "turquoise",
+        }}
+        transition="all .25s ease"
+        onClick={showSidebar}
+        icon={<MenuIcon />}
       />
-    </ThemeProvider>
+      <Flex
+        color="gray.900"
+        direction="column"
+        position="absolute"
+        w="100%"
+        minWidth="350px"
+        h="100%"
+        transform={
+          isSidebarShown ? "translate3d(0,0,0)" : "translate3d(-100%,0,0)"
+        }
+        transition="all .25s ease"
+        zIndex="2"
+      >
+        <Box>
+          <Center h="76px" bg="white" flexShrink="0">
+            <Text>Header</Text>
+          </Center>
+          <IconButton
+            position="absolute"
+            top="0"
+            right="0"
+            aria-label=""
+            bg="turquoise"
+            borderRadius="0"
+            size="sm"
+            onClick={hideSidebar}
+            icon={<CloseIcon />}
+          />
+        </Box>
+
+        <Box bg="#F5F5F5" h="0" flexGrow="1" position="relative">
+          <Tabs align="center" position="absolute" w="100%" h="100%">
+            <Flex direction="column" position="absolute" w="100%" h="100%">
+              <TabList bg="white" flexShrink="0" h="40px" color="gray.400">
+                <Tab>One</Tab>
+                <Tab>Two</Tab>
+                <Tab>Three</Tab>
+              </TabList>
+              <TabPanels overflow="auto">
+                <TabPanel>
+                  <p>one!</p>
+                </TabPanel>
+                <TabPanel>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                  <p>two!</p>
+                </TabPanel>
+                <TabPanel>
+                  <p>three!</p>
+                </TabPanel>
+              </TabPanels>
+            </Flex>
+          </Tabs>
+        </Box>
+        <Center
+          h="46px"
+          bg="white"
+          flexShrink="0"
+          borderTopWidth="1px"
+          borderTopColor="gray.300"
+        >
+          <Text>Footer</Text>
+        </Center>
+      </Flex>
+    </ChakraProvider>
   );
 };
 

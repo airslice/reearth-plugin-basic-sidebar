@@ -5,6 +5,11 @@ extensions:
   - id: sidebar
     type: widget
     name: Basic Sidebar
+    widgetLayout:
+      defaultLocation:
+        zone: outer
+        section: left
+        area: middle
     schema:
       groups:
         - id: customize

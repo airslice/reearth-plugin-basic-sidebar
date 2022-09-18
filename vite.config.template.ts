@@ -4,7 +4,7 @@
 import { resolve } from "path";
 
 import react from "@vitejs/plugin-react";
-import type { UserConfigExport, Plugin } from "vite";
+import type { UserConfigExport } from "vite";
 import { Plugin as importToCDN, autoComplete } from "vite-plugin-cdn-import";
 import { viteExternalsPlugin } from "vite-plugin-externals";
 import { viteSingleFile } from "vite-plugin-singlefile";
@@ -28,24 +28,21 @@ export const plugin = (name: string): UserConfigExport => ({
 export const web =
   (name: string): UserConfigExport =>
   ({ mode }) => ({
+    server: {
+      open: true,
+    },
     plugins: [
       react(),
       viteSingleFile(),
-      serverHeaders(),
       svgr(),
       mode === "production" &&
         importToCDN({
-          modules: [
-            autoComplete("react"),
-            autoComplete("react-dom"),
-            autoComplete("antd"),
-          ],
+          modules: [autoComplete("react"), autoComplete("react-dom")],
         }),
       mode === "production" &&
         viteExternalsPlugin({
           react: "React",
           "react-dom": "ReactDOM",
-          antd: "antd",
         }),
     ],
     publicDir: false,
@@ -64,13 +61,3 @@ export const web =
       alias: [{ find: "@web", replacement: resolve(__dirname, "web") }],
     },
   });
-
-const serverHeaders = (): Plugin => ({
-  name: "server-headers",
-  configureServer(server) {
-    server.middlewares.use((_req, res, next) => {
-      res.setHeader("Service-Worker-Allowed", "/");
-      next();
-    });
-  },
-});
