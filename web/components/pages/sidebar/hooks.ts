@@ -22,10 +22,7 @@ export default () => {
     setSidebarShown(false);
     setTimeout(() => {
       postMsg("setSidebarShown", false);
-    }, 300);
-    setTimeout(() => {
-      postMsg("setSidebarShown", false);
-    }, 1000);
+    }, 250);
   }, []);
 
   const showSidebar = useCallback(() => {
