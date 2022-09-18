@@ -14,7 +14,7 @@ export default () => {
       if (msg.source !== (globalThis as any).parent || !msg.data.act) return;
       actHandles[msg.data.act as keyof actHandles]?.(msg.data.payload);
     });
-    postMsg("getTheme");
+    // postMsg("getTheme");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

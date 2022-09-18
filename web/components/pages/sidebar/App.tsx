@@ -10,9 +10,14 @@ import {
   Text,
   Box,
   IconButton,
+  CloseButton,
 } from "@chakra-ui/react";
-import CloseIcon from "@web/components/atoms/Icons/CloseIcon";
+import LogoIcon from "@web/components/atoms/Icons/LogoIcon";
 import MenuIcon from "@web/components/atoms/Icons/MenuIcon";
+import PencilIcon from "@web/components/atoms/Icons/PencilIcon";
+import PanelOne from "@web/components/molecules/PanelOne";
+import PanelThree from "@web/components/molecules/PanelThree";
+import PanelTwo from "@web/components/molecules/PanelTwo";
 
 import useHooks from "./hooks";
 import theme from "./theme";
@@ -56,19 +61,21 @@ const App = () => {
         zIndex="2"
       >
         <Box>
-          <Center h="76px" bg="white" flexShrink="0">
-            <Text>Header</Text>
+          <Center h="76px" bg="white" flexShrink="0" pt="20px">
+            <LogoIcon m="10px" />
+            <Text color="turquoise.600">Project Name</Text>
           </Center>
-          <IconButton
+          <CloseButton
             position="absolute"
             top="0"
             right="0"
             aria-label=""
-            bg="turquoise"
+            bg="turquoise.600"
+            color="white"
             borderRadius="0"
-            size="sm"
+            size="md"
+            _hover={{ background: "turquoise" }}
             onClick={hideSidebar}
-            icon={<CloseIcon />}
           />
         </Box>
 
@@ -76,58 +83,27 @@ const App = () => {
           <Tabs align="center" position="absolute" w="100%" h="100%">
             <Flex direction="column" position="absolute" w="100%" h="100%">
               <TabList bg="white" flexShrink="0" h="40px" color="gray.400">
-                <Tab>One</Tab>
+                <Tab>
+                  <PencilIcon mr="5px" />
+                  <Text>One</Text>
+                </Tab>
                 <Tab>Two</Tab>
                 <Tab>Three</Tab>
               </TabList>
-              <TabPanels overflow="auto">
+              <TabPanels overflow="auto" flexGrow="1">
                 <TabPanel>
-                  <p>one!</p>
+                  <PanelOne />
+                </TabPanel>
+                <TabPanel
+                  h="100%"
+                  overflow="hidden"
+                  display="flex"
+                  flexDir="column"
+                >
+                  <PanelTwo />
                 </TabPanel>
                 <TabPanel>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                </TabPanel>
-                <TabPanel>
-                  <p>three!</p>
+                  <PanelThree />
                 </TabPanel>
               </TabPanels>
             </Flex>

@@ -18,6 +18,21 @@ const theme = extendTheme(
         900: "#001b1d",
       },
     },
+    components: {
+      Tabs: {
+        variants: {
+          line: {
+            tabpanel: {
+              px: "16px",
+              py: "12px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "12px",
+            },
+          },
+        },
+      },
+    },
     styles: {
       global: {
         html: {
