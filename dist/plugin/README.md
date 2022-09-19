@@ -1,4 +1,4 @@
 # reearth-plugin-toolbox
-## Toolbox - Starter
+## Toolbox - Sidebar
 
-- Just a simple starter to show some UI elements.
+- Just a simple sidebar to show some UI elements.

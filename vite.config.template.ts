@@ -6,7 +6,6 @@ import { resolve } from "path";
 import react from "@vitejs/plugin-react";
 import type { UserConfigExport, Plugin } from "vite";
 import { Plugin as importToCDN, autoComplete } from "vite-plugin-cdn-import";
-import { viteExternalsPlugin } from "vite-plugin-externals";
 import { viteSingleFile } from "vite-plugin-singlefile";
 import svgr from "vite-plugin-svgr";
 
@@ -25,45 +24,39 @@ export const plugin = (name: string): UserConfigExport => ({
   },
 });
 
-export const web =
-  (name: string): UserConfigExport =>
-  ({ mode }) => ({
-    plugins: [
-      react(),
-      viteSingleFile(),
-      serverHeaders(),
-      svgr(),
-      mode === "production" &&
-        importToCDN({
-          modules: [
-            autoComplete("react"),
-            autoComplete("react-dom"),
-            autoComplete("antd"),
-          ],
-        }),
-      mode === "production" &&
-        viteExternalsPlugin({
-          react: "React",
-          "react-dom": "ReactDOM",
-          antd: "antd",
-        }),
-    ],
-    publicDir: false,
-    root: `./web/components/pages/${name}`,
-    build: {
-      outDir: `../../../../dist/web/${name}`,
-      emptyOutDir: true,
-      reportCompressedSize: false,
-    },
-    test: {
-      globals: true,
-      environment: "jsdom",
-      setupFiles: "./web/test/setup.ts",
-    },
-    resolve: {
-      alias: [{ find: "@web", replacement: resolve(__dirname, "web") }],
-    },
-  });
+export const web = (name: string): UserConfigExport => ({
+  plugins: [
+    react(),
+    viteSingleFile(),
+    serverHeaders(),
+    svgr(),
+    importToCDN({
+      modules: [
+        autoComplete("react"),
+        autoComplete("react-dom"),
+        {
+          name: "antd",
+          var: "antd",
+          path: "https://cdnjs.cloudflare.com/ajax/libs/antd/4.23.2/antd.min.js",
+          css: "https://cdnjs.cloudflare.com/ajax/libs/antd/4.23.2/antd.variable.min.css",
+        },
+      ],
+    }),
+  ],
+  publicDir: false,
+  root: `./web/components/${name}`,
+  build: {
+    outDir: `../../../dist/web/${name}`,
+  },
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: "./web/test/setup.ts",
+  },
+  resolve: {
+    alias: [{ find: "@web", replacement: resolve(__dirname, "web") }],
+  },
+});
 
 const serverHeaders = (): Plugin => ({
   name: "server-headers",
