@@ -1,13 +1,19 @@
-import type { actHandles } from "@web/types";
-import { Tabs, ConfigProvider } from "antd";
-import {
-  // useCallback,
-  useEffect,
-  // useState,
-  useMemo,
-  // useRef,
-  // useReducer,
-} from "react";
+/// <reference types="vite-plugin-svgr/client" />
+
+import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
+import { ConfigProvider, Button, Tabs } from "antd";
+
+import Tab from "../atoms/Tab";
+import Content from "../melocules/Content";
+import Footer from "../melocules/Footer";
+import Header from "../melocules/Header";
+import PanelOne from "../melocules/PanelOne";
+import PanelTwo from "../melocules/PanelTwo";
+import SidebarPanel from "../melocules/SidebarPanel";
+
+import useHooks from "./hooks";
+
+import "./global.css";
 
 ConfigProvider.config({
   theme: {
@@ -16,33 +22,45 @@ ConfigProvider.config({
 });
 
 const App = () => {
-  const actHandles: actHandles = useMemo(() => {
-    return {};
-  }, []);
+  const { isSidebarShown, hideSidebar, showSidebar } = useHooks();
 
-  useEffect(() => {
-    (globalThis as any).addEventListener("message", (msg: any) => {
-      if (msg.source !== (globalThis as any).parent || !msg.data.act) return;
-      actHandles[msg.data.act as keyof actHandles]?.(msg.data.payload);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const items = [
+    {
+      label: <Tab icon="pencil" text="Item 1" />,
+      key: "item-1",
+      children: <PanelOne />,
+    },
+    {
+      label: <Tab text="Item 2" />,
+      key: "item-2",
+      children: <PanelTwo />,
+    },
+  ];
 
   return (
-    <>
-      <Tabs
-        defaultActiveKey="1"
-        centered
-        items={new Array(3).fill(null).map((_, i) => {
-          const id = String(i + 1);
-          return {
-            label: `Tab ${id}`,
-            key: id,
-            children: `Content of Tab Pane ${id}`,
-          };
-        })}
+    <ConfigProvider>
+      <Button
+        type="default"
+        icon={<MenuOutlined />}
+        size={"large"}
+        onClick={showSidebar}
+        style={{ position: "absolute", border: "none" }}
       />
-    </>
+      <SidebarPanel visible={isSidebarShown}>
+        <Button
+          type="primary"
+          icon={<CloseOutlined />}
+          size={"middle"}
+          onClick={hideSidebar}
+          style={{ position: "absolute", right: "0" }}
+        />
+        <Header />
+        <Content>
+          <Tabs centered items={items} />
+        </Content>
+        <Footer />
+      </SidebarPanel>
+    </ConfigProvider>
   );
 };
 

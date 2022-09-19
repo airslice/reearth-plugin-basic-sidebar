@@ -40,6 +40,16 @@ export const web = (name: string): UserConfigExport => ({
           path: "https://cdnjs.cloudflare.com/ajax/libs/antd/4.23.2/antd.min.js",
           css: "https://cdnjs.cloudflare.com/ajax/libs/antd/4.23.2/antd.variable.min.css",
         },
+        {
+          name: "react-is",
+          var: "react-is",
+          path: "https://unpkg.com/react-is@18.2.0/umd/react-is.production.min.js",
+        },
+        {
+          name: "styled-components",
+          var: "styled-components",
+          path: "https://unpkg.com/styled-components/dist/styled-components.min.js",
+        },
       ],
     }),
   ],
