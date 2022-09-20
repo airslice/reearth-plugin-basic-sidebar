@@ -39,4 +39,4 @@ This will build and zip plugin files into package folder.
 
 ## Thanks to
 
-This solution is basically refrenced [Plateauview Project](https://github.com/eukarya-inc/reearth-plateauview), thanks to all the contributors!
+This solution basically refers to [Plateauview Project](https://github.com/eukarya-inc/reearth-plateauview), thanks to all the contributors!
