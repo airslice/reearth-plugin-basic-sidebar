@@ -13,7 +13,7 @@
     "build": "run-s typecheck clean build:web build:plugin",
     "build:plugin": "vite build -c vite.config.sidebar.ts",
     "build:web": "vite build -c vite.config.sidebar-web.ts",
-    "package": "run-s build zip gen",
+    "package": "run-s build zip",
     "typecheck": "tsc",
     "test": "vitest",
     "coverage": "vitest run --coverage",
