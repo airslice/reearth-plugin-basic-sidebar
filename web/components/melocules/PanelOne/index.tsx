@@ -1,3 +1,4 @@
+import { Slider } from "antd";
 import { useMemo } from "react";
 
 import Card from "../../atoms/Card";
@@ -13,6 +14,13 @@ const PanelOne: React.FC = () => {
 
   return (
     <>
+      <Card>
+        Outer Info
+        <Card>
+          Inner Info
+          <Slider defaultValue={30} />
+        </Card>
+      </Card>
       {longList.map((i) => (
         <Card key={i}>
           <p>{i}</p>
