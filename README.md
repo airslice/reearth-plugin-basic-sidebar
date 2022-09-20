@@ -2,11 +2,11 @@
 
 ## Overview
 
-- This is a reearth plugin.
-- This is a basic sidebar with some features:
+- This is a reearth plugin designed to be used as a template to enable developers focus on content of sidebar.
+- Features:
   - Show / Hide (minimal size and show a menu button).
   - Tabs with responsive height.
-- This project use:
+- Work with:
   - React
   - [Antd](https://ant.design/components/overview/)
 
@@ -29,7 +29,7 @@ yarn start
 yarn build
 ```
 
-or more suggested:
+or more recommended:
 
 ```
 yarn package
