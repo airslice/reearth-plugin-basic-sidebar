@@ -1,0 +1,12 @@
+name: Basic Sidebar
+version: 0.1.0
+id: reearth-plugin-basic-sidebar
+extensions:
+  - id: sidebar
+    type: widget
+    name: Basic Sidebar
+    widgetLayout:
+      defaultLocation:
+        zone: outer
+        section: left
+        area: middle
