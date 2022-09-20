@@ -13,7 +13,7 @@
     "build": "run-s typecheck clean build:web build:plugin",
     "build:plugin": "vite build -c vite.config.sidebar.ts",
     "build:web": "vite build -c vite.config.sidebar-web.ts",
-    "package": "run-s build zip",
+    "package": "run-s build zip gen",
     "typecheck": "tsc",
     "test": "vitest",
     "coverage": "vitest run --coverage",
@@ -21,7 +21,7 @@
     "format": "eslint . --fix",
     "type": "tsc",
     "zip": "node ./scripts/zip.mjs",
-    "createwidget": "node ./scripts/createwidget.mjs",
+    "gen": "node ./scripts/gen.mjs",
     "clean": "del dist"
   },
   "devDependencies": {
