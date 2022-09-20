@@ -6,6 +6,11 @@ import Yml from "yml";
 
 const root = path.resolve("./");
 
+const outputDir = `${root}/package`;
+if (!fs.existsSync(outputDir)) {
+  fs.mkdirSync(outputDir);
+}
+
 const pluginInfo = Yml.load(`${root}/public/reearth.yml`);
 const filename = `${pluginInfo.id}-${pluginInfo.version}.zip`;
 
