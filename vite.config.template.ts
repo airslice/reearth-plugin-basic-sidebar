@@ -25,6 +25,9 @@ export const plugin = (name: string): UserConfigExport => ({
 });
 
 export const web = (name: string): UserConfigExport => ({
+  server: {
+    open: true,
+  },
   plugins: [
     react(),
     viteSingleFile(),
