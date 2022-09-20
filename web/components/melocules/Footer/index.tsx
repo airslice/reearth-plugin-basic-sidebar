@@ -10,7 +10,7 @@ const StyledFooter = styled.div`
   justify-content: center;
   flex: 0 0 auto;
   height: 46px;
-  border-top: 1px solid #cfcfcf;
+  /* border-top: 1px solid #cfcfcf; */
 `;
 
 export default Footer;
